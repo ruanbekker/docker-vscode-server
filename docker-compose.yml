@@ -1,0 +1,24 @@
+version: '3'
+services:
+ vscode:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+      args:
+        USER: $USER
+        UID: $UID
+        GID: $GID
+    environment:
+      - PASSWORD=password
+      - DOCKER_USER=${USER}
+      - HTTPS_ENABLED=true
+      - APP_PORT=8443
+      - APP_BIND_HOST=0.0.0.0
+      - PLUGINS=ms-python.python,ms-toolsai.jupyter,tushortz.python-extended-snippets,andyyaldoo.vscode-json,golang.go,redhat.vscode-yaml,vscode-icons-team.vscode-icons
+    user: "$UID:$GID"
+    volumes:
+      - $PWD/workspace:/home/coder/workspace
+      - $PWD/config:/home/coder/.config
+      - $PWD/certs:/home/coder/.certs
+    ports:
+      - 8443:8443
