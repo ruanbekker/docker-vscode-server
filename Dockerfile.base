@@ -27,7 +27,7 @@ RUN ARCH="$(dpkg --print-architecture)" \
   && mkdir -p /etc/fixuid \
   && printf "user: coder\ngroup: coder\n" > /etc/fixuid/config.yml
 
-COPY entrypoint.sh /usr/bin/entrypoint.sh
+COPY bin/entrypoint.sh /usr/bin/entrypoint.sh
 RUN chmod +x /usr/bin/entrypoint.sh
 
 USER 1000
