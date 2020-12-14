@@ -22,7 +22,7 @@ $ docker run -it \
   vscode:default
 ```
 
-Running with no extensions, using https and port 8443 (see minica to generate certs for local use):
+Running with no extensions, using https and port 8443 (see [docs/minica](https://github.com/ruanbekker/docker-vscode-server/blob/main/docs/minica.md) to generate certs for local use):
 
 ```
 $ docker run -it \
