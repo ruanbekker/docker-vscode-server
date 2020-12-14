@@ -1,8 +1,14 @@
 FROM debian:10
+ARG USER
+ARG UID
+ARG GID
 
 ENV HTTPS_ENABLED false
 ENV APP_BIND_HOST 0.0.0.0
 ENV APP_PORT 8080
+ENV USER ${USER}
+ENV UID ${UID}
+ENV GID ${GID}
 
 RUN apt-get update \
  && apt-get install -y \
