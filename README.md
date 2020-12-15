@@ -12,7 +12,9 @@ In vscode your workspace folder by default will be opened in `/home/coder/worksp
 
 ## Usage
 
-You can either build it yourself or use my dockerhub images.
+You can either build it yourself or use my dockerhub images. 
+
+The password is controlled by using the environment variable `PASSWORD`, if its not set, the password value will be in `~/.config/code-server/config.yaml`
 
 ### Build
 
