@@ -1,0 +1,23 @@
+FROM ruanbekker/vscode-server-base:3.7.4
+
+USER root
+
+ENV GO_VERSION 1.15.6
+ENV PATH /usr/local/go/bin:$PATH
+ENV GOPATH /home/coder/go
+ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
+RUN mkdir -p "$GOPATH/src" "$GOPATH/bin"
+
+RUN apt update \
+    && apt install gcc musl-dev -y \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN wget -O go.tgz "https://golang.org/dl/go$GO_VERSION.linux-amd64.tar.gz" \
+    && tar -C /usr/local -xzf go.tgz \
+    && rm -f go.tgz
+
+USER 1000
+ENV USER=coder
+WORKDIR /home/coder
+
+ENTRYPOINT ["/usr/bin/entrypoint.sh"]

@@ -5,12 +5,14 @@ EXTENSIONS="${EXTENSIONS:-none}"
 
 eval "$(fixuid -q)"
 
+mkdir -p /home/coder/workspace
 mkdir -p /home/coder/.local/share/code-server/User
 cat > /home/coder/.local/share/code-server/User/settings.json << EOF
 {
     "workbench.colorTheme": "Visual Studio Dark"
 }
 EOF
+chown coder /home/coder/workspace
 chown coder /home/coder/.local/share/code-server/User/settings.json
 
 if [ "${DOCKER_USER-}" ]; then
@@ -26,9 +28,12 @@ if [ ${EXTENSIONS} != "none" ]
       echo "Installing Extensions"
       for extension in $(echo ${EXTENSIONS} | tr "," "\n")
         do
-          dumb-init /usr/bin/code-server \
-            --install-extension ${plugin} \
-            /home/coder
+          if [ "${extension}" != "" ]
+            then
+              dumb-init /usr/bin/code-server \
+                --install-extension "${extension}" \
+                /home/coder
+	  fi
         done
 fi
 
@@ -38,9 +43,9 @@ if [ ${HTTPS_ENABLED} = "true" ]
       --bind-addr "${APP_BIND_HOST}":"${APP_PORT}" \
       --cert /home/coder/.certs/cert.pem \
       --cert-key /home/coder/.certs/key.pem \
-      /home/coder
+      /home/coder/workspace
 else
     dumb-init /usr/bin/code-server \
       --bind-addr "${APP_BIND_HOST}":"${APP_PORT}" \
-      /home/coder
+      /home/coder/workspace
 fi

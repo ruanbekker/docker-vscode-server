@@ -1,8 +1,10 @@
 FROM debian:10
+
 ARG USER
 ARG UID
 ARG GID
 
+ENV CODE_SERVER_VERSION 3.7.4
 ENV HTTPS_ENABLED false
 ENV APP_BIND_HOST 0.0.0.0
 ENV APP_PORT 8080
@@ -10,11 +12,14 @@ ENV USER ${USER}
 ENV UID ${UID}
 ENV GID ${GID}
 
-RUN apt-get update \
- && apt-get install -y \
-    sudo curl dumb-init htop locales \
-    git procps ssh vim lsb-release \
-  && curl -fsSL https://code-server.dev/install.sh | sh \
+RUN apt update \
+ && apt install \
+    ca-certificates sudo curl dumb-init \
+    htop locales git procps ssh vim \
+    lsb-release wget openssl -y \
+  #&& curl -fsSL https://code-server.dev/install.sh | sh \
+  && wget https://github.com/cdr/code-server/releases/download/v${CODE_SERVER_VERSION}/code-server_${CODE_SERVER_VERSION}_amd64.deb \
+  && dpkg -i code-server_${CODE_SERVER_VERSION}_amd64.deb && rm -f code-server_${CODE_SERVER_VERSION}_amd64.deb \
   && rm -rf /var/lib/apt/lists/*
 
 RUN sed -i "s/# en_US.UTF-8/en_US.UTF-8/" /etc/locale.gen && locale-gen
