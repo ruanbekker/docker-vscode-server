@@ -14,7 +14,7 @@ services:
       - HTTPS_ENABLED=true
       - APP_PORT=8443
       - APP_BIND_HOST=0.0.0.0
-      - PLUGINS=ms-python.python,ms-toolsai.jupyter,tushortz.python-extended-snippets,andyyaldoo.vscode-json,golang.go,redhat.vscode-yaml,vscode-icons-team.vscode-icons
+      - EXTENSIONS=ms-python.python,ms-toolsai.jupyter,tushortz.python-extended-snippets,andyyaldoo.vscode-json,golang.go,redhat.vscode-yaml,vscode-icons-team.vscode-icons
     user: "$UID:$GID"
     volumes:
       - $PWD/workspace:/home/coder/workspace
