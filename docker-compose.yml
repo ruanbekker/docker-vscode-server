@@ -3,7 +3,7 @@ services:
  vscode:
     build:
       context: .
-      dockerfile: Dockerfile.test
+      dockerfile: Dockerfile
       args:
         USER: $USER
         UID: $UID
