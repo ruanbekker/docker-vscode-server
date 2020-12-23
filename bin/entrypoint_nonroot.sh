@@ -1,10 +1,7 @@
 #!/bin/sh
 set -eu
 
-export PS1='\w $ '
-
 EXTENSIONS="${EXTENSIONS:-none}"
-LAB_REPO="${LAB_REPO:-none}"
 
 eval "$(fixuid -q)"
 
@@ -19,11 +16,9 @@ chown coder /home/coder/workspace
 chown -R coder /home/coder/.local
 
 if [ "${DOCKER_USER-}" ]; then
-  echo "$DOCKER_USER ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers.d/nopasswd > /dev/null
-  sudo usermod --login "$DOCKER_USER" coder
-  sudo groupmod -n "$DOCKER_USER" coder
+  #sudo usermod --login "$DOCKER_USER" coder
+  #sudo groupmod -n "$DOCKER_USER" coder
   USER="$DOCKER_USER"
-  sudo sed -i "/coder/d" /etc/sudoers.d/nopasswd
 fi
 
 if [ ${EXTENSIONS} != "none" ]
@@ -38,13 +33,6 @@ if [ ${EXTENSIONS} != "none" ]
                 /home/coder
 	  fi
         done
-fi
-
-if [ ${LAB_REPO} != "none" ]
-  then
-    cd workspace
-    git clone ${LAB_REPO}
-    cd ..
 fi
 
 if [ ${HTTPS_ENABLED} = "true" ]

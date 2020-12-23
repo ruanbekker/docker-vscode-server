@@ -1,4 +1,4 @@
-FROM ruanbekker/vscode-server-base:3.8.0
+FROM ruanbekker/vscode-server-base:3.8.0-nonroot
 
 USER root
 
@@ -9,13 +9,11 @@ RUN apt update \
     && rm -rf /var/lib/apt/lists/*
 
 RUN ln -s /usr/bin/pip3 /usr/bin/pip \
-    && ln -s /usr/bin/python3 /usr/bin/python 
-
-RUN pip install requests virtualenv flask \
-                pandas sklearn numpy matplotlib 
-
-RUN pip install mysqlclient pymysql pysftp pymongo \
-                mongoengine
+    && ln -s /usr/bin/python3 /usr/bin/python \
+    && pip install \
+         requests virtualenv flask pandas \
+         mysqlclient pymysql pysftp sklearn \
+         numpy matplotlib pymongo mongoengine
 
 USER 1000
 ENV USER=coder
