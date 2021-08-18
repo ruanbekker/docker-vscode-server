@@ -192,3 +192,7 @@ WORKDIR /home/coder
 
 ENTRYPOINT ["/usr/bin/entrypoint.sh"]
 ```
+
+## Docker Hub
+
+- [ruanbekker/vscode-server](https://hub.docker.com/r/ruanbekker/vscode-server)
