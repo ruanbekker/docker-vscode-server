@@ -15,8 +15,8 @@ cat > /home/coder/.local/share/code-server/User/settings.json << EOF
     "workbench.colorTheme": "Visual Studio Dark"
 }
 EOF
-chown coder /home/coder/workspace
-chown -R coder /home/coder/.local
+chown -R coder:coder /home/coder/workspace
+chown -R coder:coder /home/coder/.local
 
 if [ "${DOCKER_USER-}" ]; then
   echo "$DOCKER_USER ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers.d/nopasswd > /dev/null

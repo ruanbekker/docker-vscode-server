@@ -1,10 +1,10 @@
-FROM debian:10
+FROM debian:11-slim
 
 ARG USER
 ARG UID
 ARG GID
 
-ENV CODE_SERVER_VERSION 3.7.4
+ENV CODE_SERVER_VERSION 4.9.1
 ENV HTTPS_ENABLED false
 ENV APP_BIND_HOST 0.0.0.0
 ENV APP_PORT 8080
@@ -29,7 +29,11 @@ RUN chsh -s /bin/bash
 ENV SHELL /bin/bash
 
 RUN adduser --gecos '' --disabled-password coder \
-  && echo "coder ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/nopasswd
+  && echo "coder ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/nopasswd \
+  && mkdir -p /home/coder/workspace \
+  && mkdir -p /home/coder/.config/code-server \
+  && mkdir -p /home/coder/.local/share/code-server/User \
+  && chown -R coder:coder /home/coder
 
 RUN ARCH="$(dpkg --print-architecture)" \
   && curl -fsSL "https://github.com/boxboat/fixuid/releases/download/v0.4.1/fixuid-0.4.1-linux-$ARCH.tar.gz" | tar -C /usr/local/bin -xzf - \
@@ -46,3 +50,4 @@ ENV USER=coder
 WORKDIR /home/coder
 
 ENTRYPOINT ["/usr/bin/entrypoint.sh"]
+
