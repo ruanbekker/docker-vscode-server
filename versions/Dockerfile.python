@@ -1,4 +1,4 @@
-FROM ruanbekker/vscode-server-base:3.8.0
+FROM ruanbekker/vscode-server-base:4.9.1
 
 USER root
 
