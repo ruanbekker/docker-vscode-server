@@ -8,8 +8,8 @@ RUN apt update \
        libmariadb-dev -y \
     && rm -rf /var/lib/apt/lists/*
 
-RUN ln -s /usr/bin/pip3 /usr/bin/pip \
-    && ln -s /usr/bin/python3 /usr/bin/python 
+RUN ln -fs /usr/bin/pip3 /usr/bin/pip \
+    && ln -fs /usr/bin/python3 /usr/bin/python 
 
 RUN pip install requests virtualenv flask \
                 pandas sklearn numpy matplotlib 
