@@ -16,6 +16,15 @@ You can either build it yourself or use my dockerhub images.
 
 The password is controlled by using the environment variable `PASSWORD`, if its not set, the password value will be in `~/.config/code-server/config.yaml`
 
+### Note on persistence
+
+If you are using persistence, ensure the directories are owned by your user else you will get an error like this `error EACCES: permission denied`:
+
+```bash
+$ mkdir workspace config
+$ sudo chown -R "$USER:$USER" config workspace
+```
+
 ### Build
 
 Building:
