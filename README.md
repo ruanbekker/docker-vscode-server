@@ -73,7 +73,7 @@ Running with extensions, using http and port 8080:
 $ docker run -it \
   -e PASSWORD=password \
   -e DOCKER_USER=${USER} \
-  -e EXTENSIONS="ms-python.python,tushortz.python-extended-snippets,andyyaldoo.vscode-json,golang.go,redhat.vscode-yaml,vscode-icons-team.vscode-icons,HashiCorp.terraform,Tim-Koehler.helm-intellisense,Equinusocio.vsc-material-theme"
+  -e EXTENSIONS="ms-python.python,tushortz.python-extended-snippets,andyyaldoo.vscode-json,golang.go,redhat.vscode-yaml,vscode-icons-team.vscode-icons,HashiCorp.terraform,Tim-Koehler.helm-intellisense,Equinusocio.vsc-material-theme" \
   -p 8080:8080 \
   -u "$(id -u):$(id -g)" \
   -v $PWD/workspace:/home/coder/workspace \
@@ -119,7 +119,7 @@ Running with extensions, using http and port 8080:
 $ docker run -it \
   -e PASSWORD=password \
   -e DOCKER_USER=${USER} \
-  -e EXTENSIONS="ms-python.python,tushortz.python-extended-snippets,andyyaldoo.vscode-json,golang.go,redhat.vscode-yaml,vscode-icons-team.vscode-icons"
+  -e EXTENSIONS="ms-python.python,tushortz.python-extended-snippets,andyyaldoo.vscode-json,golang.go,redhat.vscode-yaml,vscode-icons-team.vscode-icons" \
   -p 8080:8080 \
   -u "$(id -u):$(id -g)" \
   -v $PWD/workspace:/home/coder/workspace \
